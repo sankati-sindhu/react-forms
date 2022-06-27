@@ -10,9 +10,7 @@ export class Forms extends Component {
             snapLabel: '',
             publishSystemId: '',
             region: 'AMER',
-            appAPAC: 'N',
-            appEMEA: 'N',
-            appAMER: 'N',
+            checked: false,
             activationStory: '',
             lastUpdatedUser: ''
         }
@@ -34,8 +32,16 @@ export class Forms extends Component {
     }
     handleRegionChange = (event) => {
         this.setState({
-            region: event.target.value 
+            region: event.target.value ,
+            checked: false
         })
+    }
+    handleCheckedChange = (event) => {
+        this.setState({
+            checked: !this.state.checked
+        })
+        
+
     }
     handleActivationStory = (event) => {
         this.setState({
@@ -47,6 +53,7 @@ export class Forms extends Component {
             lastUpdatedUser: event.target.value
         })
     }
+    
     handleSubmit = (event) => {
         event.preventDefault();
 
@@ -110,8 +117,12 @@ export class Forms extends Component {
                     Application_for_APAC:
                 </label>
                 <input className='form-check-box' 
-                        type="checkbox" >
-
+                        type="checkbox"
+                        onChange={this.handleCheckedChange}
+                        checked={this.state.region === 'APAC' && this.state.checked || false }
+                        disabled={!(this.state.region === 'APAC')} 
+                >
+                
                 </input>
             </div>
 
@@ -120,14 +131,27 @@ export class Forms extends Component {
                 <label className='form-label'>
                     Application_for_EMEA:
                 </label>
-                <input className='form-check-box' type="checkbox" ></input>
+                <input className='form-check-box' 
+                        type="checkbox"
+                        onChange={this.handleCheckedChange}
+                        checked={this.state.region === 'EMEA' && this.state.checked || false }
+                        disabled={!(this.state.region === 'EMEA')} 
+                >
+                </input>
             </div>
 
             <div className='form-item'>
                 <label className='form-label'>
                     Application_for_AMER:
                 </label>
-                <input className='form-check-box' type="checkbox" ></input>
+                <input className='form-check-box' 
+                        type="checkbox"
+                        onChange={this.handleCheckedChange}
+                        checked={this.state.region === 'AMER' && this.state.checked || false }
+                        disabled={!(this.state.region === 'AMER')} 
+                    >
+                
+                </input>
             </div>
 
             <div className='form-item'>
